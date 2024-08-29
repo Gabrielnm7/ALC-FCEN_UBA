@@ -90,3 +90,101 @@ def solve_linear_system(A_augmented):
         return None
     
     return solution
+
+def traza(A: np.ndarray) -> int:
+    """Calcula la traza de una matriz cuadrada.
+    Args:
+        A (np.ndarray): matriz cuadrada
+    Returns:
+        traza (int): traza de la matriz
+    """
+    resp = 0
+    for i in range(len(A)):
+        resp += A[i][i]
+    ## 
+    return resp
+
+def sumamodulo(A: np.ndarray) -> int:
+    """
+    Suma los valores absolutos de los elementos de una matriz.
+    Args:
+        A (np.ndarray): matriz
+    Returns:
+        resp (int): suma de los valores absolutos de los elementos de la matriz
+    """
+    resp = 0
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            resp += abs(A[i][j])
+    ## 
+    return resp
+
+def positivosmayoresanegativos(A: np.ndarray) -> bool:
+    """
+    
+    Args:
+        A (np.ndarray): matriz
+    Returns:
+        resp (bool): True si la cantidad de números positivos es mayor a la cantidad de números negativos, False en caso contrario
+    """
+    resp = True
+    positivos = 0
+    negativos = 0
+    for i in range(len(A)):
+        for j in range(len(A[i])):
+            if A[i][j] > 0:
+                positivos += 1
+            elif A[i][j] < 0:
+                negativos += 1
+    if positivos <= negativos:
+        resp = False    
+    ## 
+    return resp
+
+def escalonar_filas(M: np.ndarray) -> np.ndarray:
+    """ 
+        Retorna la Matriz Escalonada por Filas
+        Args:
+            M (np.ndarray): matriz
+        Returns:
+            np.ndarray: matriz escalonada por filas
+    """
+    A = np.copy(M)
+    if (issubclass(A.dtype.type, np.integer)):
+        A = A.astype(float)
+
+    # Si A no tiene filas o columnas, ya esta escalonada
+    f, c = A.shape
+    if f == 0 or c == 0:
+        return A
+
+    # buscamos primer elemento no nulo de la primera columna
+    i = 0
+    
+    while i < f and A[i,0] == 0:
+        i += 1
+
+    if i == f:
+        # si todos los elementos de la primera columna son ceros
+        # escalonamos filas desde la segunda columna
+        B = escalonar_filas(A[:,1:])
+        
+        # y volvemos a agregar la primera columna de zeros
+        return np.block([A[:,:1], B])
+
+
+    # intercambiamos filas i <-> 0, pues el primer cero aparece en la fila i
+    if i > 0:
+        A[[0,i],:] = A[[i,0],:]
+
+    # PASO DE TRIANGULACION GAUSSIANA:
+    # a las filas subsiguientes les restamos un multiplo de la primera
+    A[1:,:] -= (A[0,:] / A[0,0]) * A[1:,0:1]
+
+    # escalonamos desde la segunda fila y segunda columna en adelante
+    B = escalonar_filas(A[1:,1:])
+
+    # reconstruimos la matriz por bloques adosando a B la primera fila 
+    # y la primera columna (de ceros)
+    return np.block([ [A[:1,:]], [ A[1:,:1], B] ])
+

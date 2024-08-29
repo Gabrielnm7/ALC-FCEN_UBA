@@ -6,7 +6,6 @@ import numpy as np
 
 def traza(A):
     resp = 0
-    ##  CODIGO A COMPLETAR
     for i in range(len(A)):
         resp += A[i][i]
     ## 
@@ -14,7 +13,6 @@ def traza(A):
 
 def sumamodulo(A):
     resp = 0
-    ##  CODIGO A COMPLETAR
     for i in range(len(A)):
         for j in range(len(A[i])):
             resp += abs(A[i][j])
@@ -24,7 +22,6 @@ def sumamodulo(A):
 
 def positivosmayoresanegativos(A):
     resp = True
-    ##  CODIGO A COMPLETAR
     positivos = 0
     negativos = 0
     for i in range(len(A)):
@@ -61,4 +58,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
