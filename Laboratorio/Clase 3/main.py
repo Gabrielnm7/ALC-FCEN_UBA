@@ -6,9 +6,11 @@ def proyectarPts(T, wz):
     assert(T.shape == (2,2)) # chequeo de matriz 2x2
     assert(T.shape[1] == wz.shape[0]) # multiplicacion matricial valida   
     xy = None
-    ############### Insert code here!! ######################3    
 
-    ############### Insert code here!! ######################3
+    # Calculamos T * wz, * es el producto matricial
+    #xy = np.dot(T, wz)
+    xy = T @ wz
+    
     return xy
 
 def pointsGrid(corners):
@@ -60,7 +62,7 @@ def main():
     corners = np.array([[0,0],[100,100]])
     wz = pointsGrid(corners)
     vistform(T, wz, 'Deformar coordenadas')
-    
+    plt.show()
     
 if __name__ == "__main__":
     main()
