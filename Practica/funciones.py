@@ -24,34 +24,6 @@ def row_echelon(A):
     B = row_echelon(A[1:, 1:])
     return np.vstack([A[:1], np.hstack([A[1:, :1], B])])
 
-def row_echelon_augmented(A):
-    """Return Row Echelon Form of an augmented matrix A and solve the system."""
-    A = A.astype(float)  # Asegurarse de que trabajamos con floats
-    r, c = A.shape
-    
-    for i in range(min(r, c-1)):
-        # Seleccionar el pivote
-        max_row = np.argmax(np.abs(A[i:, i])) + i
-        A[[i, max_row]] = A[[max_row, i]]  # Intercambiar filas si es necesario
-
-        # Si el pivote es 0, continuar con la siguiente columna
-        if A[i, i] == 0:
-            continue
-
-        # Normalizar la fila con el pivote
-        A[i] = A[i] / A[i, i]
-
-        # Eliminar los elementos debajo del pivote
-        for j in range(i+1, r):
-            A[j] = A[j] - A[j, i] * A[i]
-    
-    # Volver hacia arriba para eliminar elementos sobre el pivote
-    for i in range(min(r, c-1)-1, -1, -1):
-        for j in range(i-1, -1, -1):
-            A[j] = A[j] - A[j, i] * A[i]
-    
-    return A
-
 def bashkara(a,b,c):
     """
     Genera las soluciones de la ecuación cuadrática ax^2+bx+c=0
@@ -187,4 +159,3 @@ def escalonar_filas(M: np.ndarray) -> np.ndarray:
     # reconstruimos la matriz por bloques adosando a B la primera fila 
     # y la primera columna (de ceros)
     return np.block([ [A[:1,:]], [ A[1:,:1], B] ])
-
