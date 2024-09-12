@@ -159,3 +159,39 @@ def escalonar_filas(M: np.ndarray) -> np.ndarray:
     # reconstruimos la matriz por bloques adosando a B la primera fila 
     # y la primera columna (de ceros)
     return np.block([ [A[:1,:]], [ A[1:,:1], B] ])
+
+
+def round_float(value, digits=3):
+    """Redondea un valor flotante a la precisión dada en base 10."""
+    return float(f"{value:.{digits}g}")
+
+
+def gauss_elimination_ej9p2(A, b):
+    """Resuelve el sistema Ax = b usando eliminación gaussiana sin intercambio de filas
+    con aritmética de punto flotante redondeada a 3 dígitos de mantisa.
+    """
+    n = len(b)
+    
+    # Aplicar eliminación gaussiana
+    for i in range(n):
+        # Normalización del pivote
+        pivot = A[i, i]
+        for j in range(i, n):
+            A[i, j] = round_float(A[i, j] / pivot)
+        b[i] = round_float(b[i] / pivot)
+        
+        # Eliminación hacia abajo
+        for k in range(i + 1, n):
+            factor = A[k, i]
+            for j in range(i, n):
+                A[k, j] = round_float(A[k, j] - factor * A[i, j])
+            b[k] = round_float(b[k] - factor * b[i])
+
+    # Sustitución hacia atrás
+    x = np.zeros(n)
+    for i in range(n - 1, -1, -1):
+        x[i] = round_float(b[i])
+        for j in range(i + 1, n):
+            x[i] = round_float(x[i] - A[i, j] * x[j])
+    
+    return x
