@@ -77,8 +77,6 @@ Este repositorio contiene el material, ejercicios y proyectos desarrollados dura
   - [*Elementos de Cálculo Numérico (apunte de la materia)*](https://cms.dm.uba.ar/academico/materias/2docuat2019/elementos_calculo_numerico_M/apunte.pdf) - Ricardo Durán, Silvia Lasalle, Julio Rossi.
 </details>
 
-## *Disclaimer*
-
-Los resueltos son hechos por mi asique cualquier sugerencia/correción para mejorar es bienvenida!
-
-Este repositorio está en constante desarrollo y mejora a medida que avanza el curso. Cualquier colaboración es bienvenida.
+> [!IMPORTANT]
+> Los resueltos son hechos por mi asique cualquier sugerencia/correción para mejorar es bienvenida!
+> Este repositorio está en constante desarrollo y mejora a medida que avanza el curso. Cualquier colaboración es bienvenida.
