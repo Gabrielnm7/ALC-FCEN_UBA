@@ -6,12 +6,10 @@
 
 Este repositorio contiene el material, ejercicios y proyectos desarrollados durante la cursada, con el objetivo de aplicar conceptos de álgebra lineal en un contexto computacional.
 
-## Estructura del Repositorio (en desarrollo)
+> [!NOTE]
+> Dejo un link con mis apuntes tomados durante las clases tanto teoricas como practicas. [Link al drive](https://drive.google.com/drive/folders/1fbL-tanaemCFYxK4czNY1tkf8336F6xB?usp=sharing)
 
-- **Teoricas/**: Contiene PDFs y apuntes de las clases teóricas.
-  - `Clase1/`
-  - `Clase2/`
-  - `...`
+## Estructura del Repositorio (en desarrollo)
   
 - **Practicas/**: Incluye enunciados y soluciones de los ejercicios prácticos.
   - `Practica_1/`
@@ -80,3 +78,4 @@ Este repositorio contiene el material, ejercicios y proyectos desarrollados dura
 > [!IMPORTANT]
 > Los resueltos son hechos por mi asique cualquier sugerencia/correción para mejorar es bienvenida!
 > Este repositorio está en constante desarrollo y mejora a medida que avanza el curso. Cualquier colaboración es bienvenida.
+
