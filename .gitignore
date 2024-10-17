@@ -1,1 +1,3 @@
-Practica/__pycache__
+# Python 
+.venv/
+__pycache__/
