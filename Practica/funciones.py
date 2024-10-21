@@ -195,3 +195,30 @@ def gauss_elimination_ej9p2(A, b):
             x[i] = round_float(x[i] - A[i, j] * x[j])
     
     return x
+
+def estado(A: np.ndarray, v: np.ndarray, k: int) -> np.ndarray:
+    """
+    Calcula A^k v usando el método de la potencia.
+    Args:
+        A (np.ndarray): matriz
+        v (np.ndarray): vector
+        k (int): potencia
+    Returns:
+        np.ndarray: resultado de A^k v
+    Pag 106, Apunte General
+    """
+
+    for i in range(k):
+        Av = A @ v
+        v = Av / np.linalg.norm(Av, 2)
+    return v
+
+def metodo_potencia_alg1(A,v,k):
+    """ Calcula una aproximación del autovalor dominante de la matriz A usando el método de la potencia.
+    
+    """
+    for i in range(k):
+        Av = A@v
+        v = Av/ np.linalg.norm(Av,2)
+        r_k = (v.T @ A @ v)/(v.T @ v)
+    return r_k        
