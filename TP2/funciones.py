@@ -192,14 +192,25 @@ def estado(A, v, k):
     """ 
     Calcula el estado de un vector v luego de k iteraciones de la matriz A (ver Pag. 106 del Apunte General)
     """
+    res_v = []
+    res_k = []
     for i in range(k):
         Av = A @ v
         v = Av / np.linalg.norm(Av,2)
-    return v
+        res_v.append(v)
+
+        rayleigh = np.dot(v.T, A @ v) / np.dot(v.T, v)
+        res_k.append(rayleigh)
+    return res_v, res_k
     
 def metodoPotencia(A,k):
     """ 
     Esta funcion encuentra el mayor autovalor de una matriz A (ver Pag. 104 del Apunte General)
     """
-    
-    return NotImplementedError
+    v = np.random.rand(A.shape[0]) # Vector aleatorio
+
+    v_k = estado(A,v,k)
+    # Cociente de Rayleigh
+    rayleigh = np.dot(v_k.T, A @ v_k) / np.dot(v_k.T, v_k)
+
+    return rayleigh, v_k
