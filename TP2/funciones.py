@@ -192,25 +192,25 @@ def estado(A, v, k):
     """ 
     Calcula el estado de un vector v luego de k iteraciones de la matriz A (ver Pag. 106 del Apunte General)
     """
-    res_v = []
-    res_k = []
-    for i in range(k):
+    for _ in range(k):
         Av = A @ v
         v = Av / np.linalg.norm(Av,2)
-        res_v.append(v)
-
-        rayleigh = np.dot(v.T, A @ v) / np.dot(v.T, v)
-        res_k.append(rayleigh)
-    return res_v, res_k
+    return v
     
 def metodoPotencia(A,k):
     """ 
     Esta funcion encuentra el mayor autovalor de una matriz A (ver Pag. 104 del Apunte General)
     """
-    v = np.random.rand(A.shape[0]) # Vector aleatorio
+    # Calculamos cuantas filas tiene A:
+    n = np.shape(A)[0]
 
-    v_k = estado(A,v,k)
-    # Cociente de Rayleigh
-    rayleigh = np.dot(v_k.T, A @ v_k) / np.dot(v_k.T, v_k)
+    # Creamos un vector aleatorio x_0 teniendo en cuenta el tamaño de A:
+    x_0 =  np.random.rand(n)
 
-    return rayleigh, v_k
+    # Aplicamos la función estado para obtener v:
+    v = estado(A, x_0, k)
+
+    # Por definición del Método de la Potencia es el cociente de Rayleigh:
+    maxAutovalor = (np.transpose(v) @ A @ v) / (np.transpose(v) @ v)
+
+    return maxAutovalor
