@@ -9,22 +9,23 @@ Este repositorio contiene el material, ejercicios y proyectos desarrollados dura
 > [!NOTE]
 > Dejo un link con mis apuntes tomados durante las clases tanto teoricas como practicas. [Link al drive](https://drive.google.com/drive/folders/1fbL-tanaemCFYxK4czNY1tkf8336F6xB?usp=sharing)
 
-## Estructura del Repositorio (en desarrollo)
-  
-- **Practicas/**: Incluye enunciados y soluciones de los ejercicios prácticos.
-  - `Practica_1/`
-    - `Resuelto`
-    - `Ejercicios`
-  - `...`
-  
-  
-- **Laboratorio/**: Desarrollo de código correspondiente a los ejercicios vistos en la teoría y la práctica.
-  - `Ejercicio_1/`
-  - `Ejercicio_2/`
-  
-- **_src/**: Recursos adicionales como imágenes y datasets utilizados en el curso.
-  - `images/`
-  - `datasets/`
+> [!IMPORTANT]
+> Los resueltos son hechos por mi asique cualquier sugerencia/correción para mejorar es bienvenida!
+> Este repositorio está en constante desarrollo y mejora a medida que avanza el curso. Cualquier colaboración es bienvenida.
+
+## Estructuctura del repositorio (en desarrollo)
+<details>
+  <summary><strong>Click aca para ver la estructura en formato tabla</strong></summary>
+
+| Clase  | Laboratorio |   
+| -----  | ----------------- |
+| *Clase 1: Introduccion a Numpy y Álgebra Lineal* | [Numpy](./Laboratorio/Clase%201/) |
+| *Clase 2: Numeros de Maquina* | [Notebook](./Laboratorio/Clase%202/Clase2-%20Numeros%20de%20maquina.ipynb), [Como escalonar filas](./Laboratorio/Clase%202/labo02-escalonar_filas.ipynb) y [ejercicios](./Laboratorio/Clase%202/ejercicioclase2.ipynb)|
+| *Clase 3: Transformaciones lineales* | [PDF](./Laboratorio/Clase%203/labo03-TransformacionesLineales.pdf) y [codigo](./Laboratorio/Clase%203/main.py)|
+
+
+Para las practicas, esta la carpeta [**Practica**](./Practica/), me faltan los pdf.
+</details>
 
 ## Programa de la Materia
 <details>
@@ -74,8 +75,3 @@ Este repositorio contiene el material, ejercicios y proyectos desarrollados dura
   - [*Álgebra lineal (apunte de la materia)*](https://mate.dm.uba.ar/~jeronimo/algebra_lineal/) - Gabriela Jeronimo, Juan Sabia, Susana Tesauri.
   - [*Elementos de Cálculo Numérico (apunte de la materia)*](https://cms.dm.uba.ar/academico/materias/2docuat2019/elementos_calculo_numerico_M/apunte.pdf) - Ricardo Durán, Silvia Lasalle, Julio Rossi.
 </details>
-
-> [!IMPORTANT]
-> Los resueltos son hechos por mi asique cualquier sugerencia/correción para mejorar es bienvenida!
-> Este repositorio está en constante desarrollo y mejora a medida que avanza el curso. Cualquier colaboración es bienvenida.
-
