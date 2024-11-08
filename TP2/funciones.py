@@ -186,7 +186,8 @@ def inversaLU(L, U, P=None):
 
     return A_inv
 
-## Hasta aca son las mismas funciones que en el TP1
+# Hasta aca son las mismas funciones que en el TP1
+
 
 def estado(A, v, k):
     """ 
@@ -194,10 +195,11 @@ def estado(A, v, k):
     """
     for _ in range(k):
         Av = A @ v
-        v = Av / np.linalg.norm(Av,2)
+        v = Av / np.linalg.norm(Av, 2)
     return v
-    
-def metodoPotencia(A,k):
+
+
+def metodoPotencia(A, k):
     """ 
     Esta funcion encuentra el mayor autovalor de una matriz A (ver Pag. 104 del Apunte General)
     """
@@ -205,7 +207,7 @@ def metodoPotencia(A,k):
     n = np.shape(A)[0]
 
     # Creamos un vector aleatorio x_0 teniendo en cuenta el tamaño de A:
-    x_0 =  np.random.rand(n)
+    x_0 = np.random.rand(n)
 
     # Aplicamos la función estado para obtener v:
     v = estado(A, x_0, k)
@@ -214,6 +216,7 @@ def metodoPotencia(A,k):
     maxAutovalor = (np.transpose(v) @ A @ v) / (np.transpose(v) @ v)
 
     return maxAutovalor
+
 
 def normalizar_matriz(A):
     """
@@ -225,22 +228,33 @@ def normalizar_matriz(A):
     A_normalizada = E @ A
     return A_normalizada
 
-def matriz_de_covarianzas(A_normalizada):
-    """
-    Esta funcion calcula una matriz de covarianzas a partir de una matriz normalizada
-    """
-    n = A_normalizada.shape[0]
-    C = (A_normalizada.T @ A_normalizada) / (n - 1)
-    return C
 
-def deflacion_de_Hotelling(A, k, epsilon):
+def deflacion_de_Hotelling(C, k, epsilon):
     """
     Implementa el proceso de Deflación de Hotelling para encontrar los dos primeros autovalores y autovectores de A
     """
-    # Implementar
-    # Inicializo un vector aliatorio X_0 de norma 1
-    n = A.shape[0]
-    x_0 = np.random.rand(n)
-    x_0 = x_0 / np.linalg.norm(x_0, 2)
-    
-    return None
+    # tomamos un vector inicial aleatorio con norma 1
+    x_k = np.random.rand(C.shape[0])
+    x_k = x_k / np.linalg.norm(x_k)
+
+    for _ in range(k):
+        # multiplicamos la matriz de covarianza por el vector actual
+        x_k1 = C @ x_k
+
+        # normalizamos
+        x_k1 = x_k1 / np.linalg.norm(x_k1)
+
+        # verificamos el criterio de parada
+        if np.linalg.norm(x_k1 - x_k) < epsilon:
+            break
+
+        # actualizamos
+        x_k = x_k1
+
+    # primer autovector
+    v = x_k
+
+    # autovalor asociado (coeficiente de Rayleigh)
+    autovalor = (v.T @ C @ v) / (v.T @ v)
+
+    return v, autovalor
