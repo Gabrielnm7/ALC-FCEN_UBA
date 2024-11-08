@@ -214,3 +214,33 @@ def metodoPotencia(A,k):
     maxAutovalor = (np.transpose(v) @ A @ v) / (np.transpose(v) @ v)
 
     return maxAutovalor
+
+def normalizar_matriz(A):
+    """
+    Esta funcion normaliza la matriz de coeficientes $A_{rr}$
+    """
+    n = A.shape[0]
+    e = np.ones((n, 1))
+    E = np.eye(n) - (1/n) * e @ e.T
+    A_normalizada = E @ A
+    return A_normalizada
+
+def matriz_de_covarianzas(A_normalizada):
+    """
+    Esta funcion calcula una matriz de covarianzas a partir de una matriz normalizada
+    """
+    n = A_normalizada.shape[0]
+    C = (A_normalizada.T @ A_normalizada) / (n - 1)
+    return C
+
+def deflacion_de_Hotelling(A, k, epsilon):
+    """
+    Implementa el proceso de Deflación de Hotelling para encontrar los dos primeros autovalores y autovectores de A
+    """
+    # Implementar
+    # Inicializo un vector aliatorio X_0 de norma 1
+    n = A.shape[0]
+    x_0 = np.random.rand(n)
+    x_0 = x_0 / np.linalg.norm(x_0, 2)
+    
+    return None
