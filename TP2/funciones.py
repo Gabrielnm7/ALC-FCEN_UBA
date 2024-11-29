@@ -189,17 +189,24 @@ def inversaLU(L, U, P=None):
 # Hasta aca son las mismas funciones que en el TP1
 
 
-def estado(A, v, k):
+def estado(A, v, k, tol=1e-6):
     """ 
     Calcula el estado de un vector v luego de k iteraciones de la matriz A (ver Pag. 106 del Apunte General)
     """
     for _ in range(k):
         Av = A @ v
-        v = Av / np.linalg.norm(Av, 2)
+        v_nuevo = Av / np.linalg.norm(Av, 2)
+
+        # Criterio de convergencia
+        if np.linalg.norm(v_nuevo - v, 2) < tol:
+            break
+        
+        v = v_nuevo
+
     return v
 
 
-def metodoPotencia(A, k):
+def metodoPotencia(A, k, tol= 1e-6):
     """ 
     Esta funcion encuentra el mayor autovalor de una matriz A (ver Pag. 104 del Apunte General)
     """
@@ -210,7 +217,7 @@ def metodoPotencia(A, k):
     x_0 = np.random.rand(n)
 
     # Aplicamos la función estado para obtener v:
-    v = estado(A, x_0, k)
+    v = estado(A, x_0, k,tol)
 
     # Por definición del Método de la Potencia es el cociente de Rayleigh:
     maxAutovalor = (np.transpose(v) @ A @ v) / (np.transpose(v) @ v)
