@@ -225,43 +225,35 @@ def metodoPotencia(A, k, tol= 1e-6):
     return maxAutovalor
 
 
-def normalizar_matriz(A):
+def deflacion_de_Hotelling(C, k, epsilon, max_iter=100000):
     """
-    Esta funcion normaliza la matriz de coeficientes $A_{rr}$
-    """
-    n = A.shape[0]
-    e = np.ones((n, 1))
-    E = np.eye(n) - (1/n) * e @ e.T
-    A_normalizada = E @ A
-    return A_normalizada
-
-
-def deflacion_de_Hotelling(C, k, epsilon):
-    """
-    Implementa el proceso de Deflación de Hotelling para encontrar los dos primeros autovalores y autovectores de A
+    Implementa el proceso de Deflación de Hotelling para calcular los k mayores autovalores y autovectores de C.
     """
     # tomamos un vector inicial aleatorio con norma 1
-    x_k = np.random.rand(C.shape[0])
-    x_k = x_k / np.linalg.norm(x_k)
-
+    x = np.random.rand(C.shape[0])
+    x = x / np.linalg.norm(x)
+    
+    autovects = []
+    autovalores = []
+    
     for _ in range(k):
-        # multiplicamos la matriz de covarianza por el vector actual
-        x_k1 = C @ x_k
+        iter_count = 0
+        criterio = False
+        while not criterio:
+            x_prev = x
+            x = C @ x
+            x = x / np.linalg.norm(x, 2)
+            iter_count += 1
 
-        # normalizamos
-        x_k1 = x_k1 / np.linalg.norm(x_k1)
+            # Criterio de parada, si nunca llega a ser menor a epsilon, se corta en max_iter iteraciones
+            if np.linalg.norm(x - x_prev, 2) < epsilon or iter_count > max_iter:
+                criterio = True
 
-        # verificamos el criterio de parada
-        if np.linalg.norm(x_k1 - x_k) < epsilon:
-            break
-
-        # actualizamos
-        x_k = x_k1
-
-    # primer autovector
-    v = x_k
-
-    # autovalor asociado (coeficiente de Rayleigh)
-    autovalor = (v.T @ C @ v) / (v.T @ v)
-
-    return v, autovalor
+        # autovalor correspondiente al autovector encontrado
+        l = (x.T @ C @ x) / (x.T @ x)
+        C -= l * np.outer(x, x)
+             
+        autovects.append(x)
+        autovalores.append(l)
+        
+    return autovects, autovalores
